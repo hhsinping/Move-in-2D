@@ -1,0 +1,507 @@
+<!DOCTYPE html>
+
+
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="description"
+        content="Move-in-2D: 2D-Conditioned Human Motion Generation">
+  <meta name="keywords" content="Move-in-2D, Movein2D, human motion generation">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Move-in-2D</title>
+
+
+  <link href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro"
+        rel="stylesheet">
+
+  <link rel="stylesheet" href="./static/css/bulma.min.css">
+  <link rel="stylesheet" href="./static/css/bulma-carousel.min.css">
+  <link rel="stylesheet" href="./static/css/bulma-slider.min.css">
+  <link rel="stylesheet" href="./static/css/fontawesome.all.min.css">
+  <link rel="stylesheet"
+        href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
+  <link rel="stylesheet" href="./static/css/index.css">
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script defer src="./static/js/fontawesome.all.min.js"></script>
+  <script src="./static/js/bulma-carousel.min.js"></script>
+  <script src="./static/js/bulma-slider.min.js"></script>
+  <script src="./static/js/index.js"></script>
+</head>
+<body>
+
+<nav class="navbar" role="navigation" aria-label="main navigation">
+  <div class="navbar-brand">
+    <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false">
+      <span aria-hidden="true"></span>
+      <span aria-hidden="true"></span>
+      <span aria-hidden="true"></span>
+    </a>
+  </div>
+</nav>
+
+
+<section class="hero">
+  <div class="hero-body">		
+      <div class="container head">
+        <div class="columns is-centered">
+          <div class="column has-text-centered head">
+
+		  
+          <h1 class="title is-1 publication-title">Move-in-2D: 2D-Conditioned Human Motion Generation</h1>
+          <div class="is-size-5 publication-authors">
+            <span class="author-block">
+              <a href="https://hhsinping.github.io/">Hsin-Ping Huang</a><sup>1,2</sup>,  </span>
+            <span class="author-block">
+              <a href="https://yzhou359.github.io/">Yang Zhou</a><sup>1</sup>,  </span>
+            <span class="author-block">
+              <a href="http://juiwang.com/">Jui-Hsien Wang</a><sup>1</sup>,  </span>
+            <span class="author-block">
+              <a href="https://difanliu.github.io/">Difan Liu</a><sup>1</sup>,  </span>
+            <span class="author-block">
+              <a href="https://pages.cs.wisc.edu/~fliu/">Feng Liu</a><sup>1</sup>,  </span>
+            <span class="author-block">
+              <a href="https://faculty.ucmerced.edu/mhyang/">Ming-Hsuan Yang</a><sup>2</sup>,  </span>
+            <span class="author-block">
+              <a href="https://scholar.google.com/citations?user=pF2vMhgAAAAJ">Zhan Xu</a><sup>1</sup></span>
+          </div>
+
+          <div class="is-size-5 publication-authors">
+            <span class="author-block"><sup>1</sup>Adobe Research,  </span>
+            <span class="author-block"><sup>2</sup>University of California, Merced</span>
+          </div>
+
+          <div class="column has-text-centered">
+            <div class="publication-links">
+              <!-- PDF Link. -->
+              <span class="link-block">
+                <a href="paper.pdf"
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                      <i class="fas fa-file-pdf"></i>
+                  </span>
+                  <span>Paper</span>
+                </a>
+              </span>
+              <span class="link-block">
+                <a href="https://arxiv.org/abs/"
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                      <i class="ai ai-arxiv"></i>
+                  </span>
+                  <span>arXiv</span>
+                </a>
+              </span>
+            </div>
+
+          </div>
+		  <h2 class="is-size-4"><i>Move-in-2D</i> generates a motion sequence that aligns with a given text<br> prompt and projects naturally onto the target scene.</h2>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- Paper abstract -->
+<section class="section hero is-light">
+  <div class="container is-max-desktop">
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-four-fifths">
+        <h2 class="title is-3">Abstract</h2>
+        <div class="content has-text-justified">
+          <p>
+		  Generating realistic human videos remains a challenging task, with the most effective methods currently relying on a human motion sequence as a control signal. Existing approaches often use existing motion extracted from other videos, which restricts applications to specific motion types and global scene matching. We propose <i>Move-in-2D</i>, a novel approach to generate human motion sequences conditioned on a scene image, allowing for diverse motion that adapts to different scenes. Our approach utilizes a diffusion model that accepts both a scene image and text prompt as inputs, producing a motion sequence tailored to the scene. To train this model, we collect a large-scale video dataset featuring single-human activities, annotating each video with the corresponding human motion as the target output. Experiments demonstrate that our method effectively predicts human motion that aligns with the scene image after projection. Furthermore, we show that the generated motion sequence improves human motion quality in video synthesis tasks.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<!-- End paper abstract -->
+
+
+<section class="section hero is-small">
+  <div class="hero-body">
+    <div class="container is-max-desktop">
+      <h2 class="title is-3">Background</h2>
+<p>Generating realistic human motion in a scene remains a challenging task in video generation due to the complexity of human movement. Many works have improved the quality of human videos by using motion sequences, typically extracted from other videos, as control signals during the generation process. In contrast, we propose a novel task of <strong><i>2D-conditioned human motion generation</i></strong>, defined as follows: given an image representing the target scene and a text prompt describing the desired motion, we <strong><i>generate</i></strong> a motion sequence that aligns with the text description and can be naturally projected onto the scene image.</p>
+      <br>
+    </div>
+  </div>
+</section>
+
+
+<section class="section hero is-small is-light">
+  <div class="hero-body">
+    <div class="container  is-max-desktop">
+      <h2 class="title is-3">Humans-in-Context Motion Dataset</h2>
+	  <p>To tackle the proposed task, we collect the Humans-in-Context Motion (HiC-Motion) dataset, a large collection of human videos with pseudo ground truth human motions, text prompts, and background scene images. Sourced from open-domain internet videos, the dataset includes 300k videos spanning a wide range of indoor and outdoor scenes, as well as over 1k human activity categories. We apply a basic inpainting model to remove humans from the video frames and filter the videos to ensure static backgrounds, enabling any selected frame to consistently represent the scene throughout the motion sequence.</p>
+	  <br>
+	  <div id="results-carousel" class="carousel results-carousel">
+		<div class="item item-video1">
+		  <video id="dataset_video1" playsinline autoplay muted loop height="90%" src="video/dataset/sample1.mp4"></video>
+		  <p class="video-caption">little girl with toy baby carriage</p>
+		</div>
+
+		<div class="item item-video2">
+		  <video id="dataset_video2" playsinline autoplay muted loop height="90%" src="video/dataset/sample2.mp4"></video>
+		  <p class="video-caption">Sexy woman pole dancer dancing at night beside swimming pool</p>
+		</div>
+
+		<div class="item item-video3">
+		  <video id="dataset_video3" playsinline autoplay muted loop height="90%" src="video/dataset/sample3.mp4"></video>
+		  <p class="video-caption">Football player throws and kicks ball. Sunny day.</p>
+		</div>
+		
+		<div class="item item-video4">
+		  <video id="dataset_video4" playsinline autoplay muted loop height="90%" src="video/dataset/sample4.mp4"></video>
+		  <p class="video-caption">Adult man in winter clothes fast riding and carrying passenger in the trailer of mini snowmobile through snowdrifts in the field</p>
+		</div>
+
+		<div class="item item-video5">
+		  <video id="dataset_video5" playsinline autoplay muted loop height="90%" src="video/dataset/sample5.mp4"></video>
+		  <p class="video-caption">The child walks and plays near the kindergarten, outdoor.</p>
+		</div>		
+
+		<div class="item item-video6">
+		  <video id="dataset_video6" playsinline autoplay muted loop height="90%" src="video/dataset/sample6.mp4"></video>
+		  <p class="video-caption">A young girl performs modern hip hop dance on the streets of the city during the summer, twisting and rotating.</p>
+		</div>
+
+		<div class="item item-video7">
+		  <video id="dataset_video7" playsinline autoplay muted loop height="90%" src="video/dataset/sample7.mp4"></video>
+		  <p class="video-caption">Full length overjoyed young funky guy funny dancing to popular music, celebrating freedom in kitchen. </p>
+		</div>
+		
+		<div class="item item-video8">
+		  <video id="dataset_video8" playsinline autoplay muted loop height="90%" src="video/dataset/sample8.mp4"></video>
+		  <p class="video-caption">warehouse worker</p>
+		</div>
+
+		<div class="item item-video9">
+		  <video id="dataset_video9" playsinline autoplay muted loop height="90%" src="video/dataset/sample9.mp4"></video>
+		  <p class="video-caption">African American man working out by jogging at the beach in Southern California. </p>
+		</div>		
+
+      </div>
+    </div>
+  </div>
+</section>
+<!-- End vid2vid carousel -->
+
+
+<section class="section hero is-small">
+  <div class="hero-body">
+    <div class="container is-max-desktop">
+      <h2 class="title is-3">Approach</h2>
+      <p>We propose a transformer-based diffusion model to generate a motion sequence that is semantically aligned with the input description and physically compatible with the scene. To improve the model's ability to capture interactions between the inputs, we employ an in-context learning strategy, incorporating scene and text inputs into the model via a shared token space. The transformer model then generates a human motion sequence through a diffusion denoising process. The diffusion timestep is encoded into the AdaLN layer to enhance the temporal smoothness of the generated motions.</p>
+      <br>
+    </div>
+    <div class="container is-max-desktop" style="text-align: center;">
+      <img src="video/fig_method.png" width="80%"/>
+    </div>
+  </div>
+</section>
+
+
+
+
+<section class="section hero is-small is-light">
+  <div class="hero-body">
+    <div class="container  is-max-desktop">
+      <h2 class="title is-3">Motion generation with large dynamics</h2>
+	  <p>Our model generates motions with large dynamics, demonstrating strong scene compatibility by accurately placing the human sequence and ensuring natural movement within the environment. It also produces complex human activities such as playing tennis—a challenging task for video generation models that our approach handles effectively.</p>
+      <br>
+	  <div id="results-carousel" class="carousel results-carousel">
+		<div class="item item-video1">
+		  <video id="vid2vid_video1" playsinline autoplay muted loop height="90%" src="video/large_motion/ours1.mp4"></video>
+		  <p class="video-caption">A person playing tennis.</p>
+		</div>
+
+		<div class="item item-video2">
+		  <video id="vid2vid_video2" playsinline autoplay muted loop height="90%" src="video/large_motion/ours2.mp4"></video>
+		  <p class="video-caption">A person jumping rope.</p>
+		</div>
+
+		<div class="item item-video3">
+		  <video id="vid2vid_video3" playsinline autoplay muted loop height="90%" src="video/large_motion/ours3.mp4"></video>
+		  <p class="video-caption">A person jumping on a trampoline.</p>
+		</div>
+		
+		<div class="item item-video4">
+		  <video id="vid2vid_video4" playsinline autoplay muted loop height="90%" src="video/large_motion/ours4.mp4"></video>
+		  <p class="video-caption">A person swinging on a swing.</p>
+		</div>
+
+		<div class="item item-video5">
+		  <video id="vid2vid_video5" playsinline autoplay muted loop height="90%" src="video/large_motion/ours5.mp4"></video>
+		  <p class="video-caption">A person doing lunge.</p>
+		</div>		
+
+		<div class="item item-video6">
+		  <video id="vid2vid_video6" playsinline autoplay muted loop height="90%" src="video/large_motion/ours6.mp4"></video>
+		  <p class="video-caption">A person playing basketball.</p>
+		</div>		
+
+		<div class="item item-video7">
+		  <video id="vid2vid_video7" playsinline autoplay muted loop height="90%" src="video/large_motion/ours7.mp4"></video>
+		  <p class="video-caption">A person riding a bike.</p>
+		</div>		
+
+		<div class="item item-video8">
+		  <video id="vid2vid_video8" playsinline autoplay muted loop height="90%" src="video/large_motion/ours8.mp4"></video>
+		  <p class="video-caption">A person stretching arms.</p>
+		</div>		
+
+		<div class="item item-video9">
+		  <video id="vid2vid_video9" playsinline autoplay muted loop height="90%" src="video/large_motion/ours9.mp4"></video>
+		  <p class="video-caption">A person climbing.</p>
+		</div>		
+
+		<div class="item item-video10">
+		  <video id="vid2vid_video10" playsinline autoplay muted loop height="90%" src="video/large_motion/ours10.mp4"></video>
+		  <p class="video-caption">A person dancing ballet.</p>
+		</div>		
+
+		<div class="item item-video11">
+		  <video id="vid2vid_video11" playsinline autoplay muted loop height="90%" src="video/large_motion/ours11.mp4"></video>
+		  <p class="video-caption">A person dancing hip-hop.</p>
+		</div>		
+
+		<div class="item item-video12">
+		  <video id="vid2vid_video12" playsinline autoplay muted loop height="90%" src="video/large_motion/ours12.mp4"></video>
+		  <p class="video-caption">A person dancing.</p>
+		</div>		
+
+		<div class="item item-video13">
+		  <video id="vid2vid_video13" playsinline autoplay muted loop height="90%" src="video/large_motion/ours13.mp4"></video>
+		  <p class="video-caption">A person riding a bike.</p>
+		</div>		
+
+		<div class="item item-video14">
+		  <video id="vid2vid_video14" playsinline autoplay muted loop height="90%" src="video/large_motion/ours14.mp4"></video>
+		  <p class="video-caption">A person playing tennis.</p>
+		</div>		
+
+		<div class="item item-video15">
+		  <video id="vid2vid_video15" playsinline autoplay muted loop height="90%" src="video/large_motion/ours15.mp4"></video>
+		  <p class="video-caption">A person jumping rope.</p>
+		</div>		
+
+      </div>
+    </div>
+  </div>
+</section>
+<!-- End vid2vid carousel -->
+
+
+
+
+<section class="section hero is-small">
+  <div class="hero-body">
+    <div class="container  is-max-desktop">
+      <h2 class="title is-3">Affordance-aware human generation</h2>
+	  <p>Our model generates human poses that are consistent with both the text prompts and the scene context, such as standing at the edge of a cliff, sitting on a chair, and surfing on a board. In addition, our model is capable of generating complex human-scene interactions, including activities such as riding a horse, decorating a tree, and petting a dog.</p>
+      <br>
+	  <div id="results-carousel" class="carousel results-carousel">
+		<div class="item item-video1">
+		  <video id="vid2vid_video1" playsinline autoplay muted loop height="90%" src="video/affordance/ours1.mp4"></video>
+		  <p class="video-caption">A person riding horse.</p>
+		</div>
+
+		<div class="item item-video2">
+		  <video id="vid2vid_video2" playsinline autoplay muted loop height="90%" src="video/affordance/ours2.mp4"></video>
+		  <p class="video-caption">A person using laptop.</p>
+		</div>
+
+		<div class="item item-video3">
+		  <video id="vid2vid_video3" playsinline autoplay muted loop height="90%" src="video/affordance/ours3.mp4"></video>
+		  <p class="video-caption">A person drinking coffee.</p>
+		</div>
+		
+		<div class="item item-video4">
+		  <video id="vid2vid_video4" playsinline autoplay muted loop height="90%" src="video/affordance/ours4.mp4"></video>
+		  <p class="video-caption">A person sitting.</p>
+		</div>
+
+		<div class="item item-video5">
+		  <video id="vid2vid_video5" playsinline autoplay muted loop height="90%" src="video/affordance/ours5.mp4"></video>
+		  <p class="video-caption">A person doing meditation.</p>
+		</div>		
+
+		<div class="item item-video6">
+		  <video id="vid2vid_video6" playsinline autoplay muted loop height="90%" src="video/affordance/ours6.mp4"></video>
+		  <p class="video-caption">A person stretching legs.</p>
+		</div>		
+
+		<div class="item item-video7">
+		  <video id="vid2vid_video7" playsinline autoplay muted loop height="90%" src="video/affordance/ours7.mp4"></video>
+		  <p class="video-caption">A person decorating tree.</p>
+		</div>		
+
+		<div class="item item-video8">
+		  <video id="vid2vid_video8" playsinline autoplay muted loop height="90%" src="video/affordance/ours8.mp4"></video>
+		  <p class="video-caption">A person surfing.</p>
+		</div>		
+
+		<div class="item item-video9">
+		  <video id="vid2vid_video9" playsinline autoplay muted loop height="90%" src="video/affordance/ours9.mp4"></video>
+		  <p class="video-caption">A person petting dog.</p>
+		</div>		
+
+      </div>
+    </div>
+  </div>
+</section>
+<!-- End vid2vid carousel -->
+
+
+<section class="section hero is-small is-light">
+  <div class="hero-body">
+    <div class="container  is-max-desktop">
+      <h2 class="title is-3">Comparison to state-of-the-art</h2>
+<p>Compared with existing models conditioned on single or multiple modalities, the text-conditioned model <i>MDM</i> (Tevet et al., ICLR 2023) struggles with generating long sequences, while <i>MLD</i> (Chen et al., CVPR 2023) generates running actions but lacks scene compatibility. The scene-conditioned method <i>SceneDiff</i> (Huang et al., CVPR 2023) fails to produce accurate poses, and <i>HUMANISE</i> (Wang et al., NeurIPS 2022) generates static motions. These methods, trained on limited synthetic data, struggle with real-world scenes. In contrast, our model generates motion that aligns with both the scene and text prompts.</p>      <br>
+      <div class="columns is-centered">
+
+		<div class="column is-centered">
+		  <div class="content">
+			<video autoplay controls muted loop playsinline height="100%">
+			  <source src="video/comparison/mdm1.mp4" type="video/mp4">
+			</video>
+			<p class="video-caption">MDM (Tevet et al., ICLR 2023)</p>
+			
+			<video autoplay controls muted loop playsinline height="100%">
+			  <source src="video/comparison/humanise1.mp4" type="video/mp4">
+			</video>
+			<p class="video-caption">HUMANISE (Wang et al., NeurIPS 2022)</p>
+
+		  </div>
+		</div>
+		
+		<div class="column is-centered">
+		  <div class="content">
+			<video autoplay controls muted loop playsinline height="100%">
+			  <source src="video/comparison/mld1.mp4" type="video/mp4">
+			</video>
+			<p class="video-caption">MLD (Chen et al., CVPR 2023)</p>
+			<video autoplay controls muted loop playsinline height="100%">
+			  <source src="video/comparison/ours-scene1.mp4" type="video/mp4">
+			</video>
+			<p class="video-caption"><b>Move-in-2D (Scene cond.)</b></p>
+
+		  </div>
+		</div>
+
+		<div class="column is-centered">
+		  <div class="content">
+			<video autoplay controls muted loop playsinline height="100%">
+			  <source src="video/comparison/scenediff1.mp4" type="video/mp4">
+			</video>
+			<p class="video-caption">SceneDiff (Huang et al., CVPR 2023)</p>
+
+			<video autoplay controls muted loop playsinline height="100%">
+			  <source src="video/comparison/ours1.mp4" type="video/mp4">
+			</video>
+			<p class="video-caption"><b>Move-in-2D</b></p>
+
+		  </div>
+		</div>		
+      </div>
+	 
+    </div>
+  </div>
+</section>
+
+
+
+
+<section class="section hero is-small">
+  <div class="hero-body">
+    <div class="container  is-max-desktop">
+      <h2 class="title is-3">Motion-guided human video generation</h2>
+	  <p>Our approach enables a two-pass human video generation pipeline. In the first pass, our model generates scene-compatible motion sequences from a scene image and text prompt. This motion then serves as a control signal for the subsequent video generation, such as using <i>Gen-3</i> (Runway, 2024) to produce a motion-guided video. The motion generated by our model ensures accurate human shapes and smooth movement in the resulting videos.</p>
+      <br>
+      <div class="columns is-centered">
+
+		<div class="column is-centered">
+		  <div class="content">
+			<video autoplay controls muted loop playsinline height="100%">
+			  <source src="video/video_generation/ours1.mp4" type="video/mp4">
+			</video>
+			
+			<video autoplay controls muted loop playsinline height="100%">
+			  <source src="video/video_generation/gen1.mp4" type="video/mp4">
+			</video>
+			<p class="video-caption">A women performing belly dance.</p>
+		  </div>
+		</div>
+		
+		<div class="column is-centered">
+		  <div class="content">
+			<video autoplay controls muted loop playsinline height="100%">
+			  <source src="video/video_generation/ours2.mp4" type="video/mp4">
+			</video>
+			
+			<video autoplay controls muted loop playsinline height="100%">
+			  <source src="video/video_generation/gen2.mp4" type="video/mp4">
+			</video>
+			<p class="video-caption">A man hitting a tennis return.</p>
+		  </div>
+		</div>
+
+		<div class="column is-centered">
+		  <div class="content">
+			<video autoplay controls muted loop playsinline height="100%">
+			  <source src="video/video_generation/ours3.mp4" type="video/mp4">
+			</video>
+			
+			<video autoplay controls muted loop playsinline height="100%">
+			  <source src="video/video_generation/gen3.mp4" type="video/mp4">
+			</video>
+			<p class="video-caption">A women performing a dance move.</p>
+		  </div>
+		</div>		
+      </div>
+	
+	  <div class="left-caption">
+		<p>Move-in-2D + Gen-3</p>
+	  </div>
+	  
+	  <div class="left-caption2">
+		<p>Move-in-2D</p>
+	  </div>  
+    </div>
+
+  </div>
+</section>
+
+
+<section class="section hero is-small is-light" id="BibTeX">
+  <div class="container is-max-desktop content">
+    <h2 class="title">BibTeX</h2>
+    <pre><code>@article{huang2024move,
+  author    = {Huang, Hsin-Ping and Zhou, Yang and Wang, Jui-Hsien and Liu, Difan and Liu, Feng and Yang, Ming-Hsuan and Xu, Zhan},
+  title     = {Move-in-2D: 2D-Conditioned Human Motion Generation},
+  journal   = {arXiv preprint arXiv:},
+  year      = {2024},
+}</code></pre>
+  </div>
+</section>
+
+
+<footer class="footer">
+  <div class="container">
+    <div class="columns is-centered">
+      <div class="column is-8">
+        <div class="content">
+          <p>This webpage is built using the <a href="https://github.com/nerfies/nerfies.github.io">Nerfies template</a>.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>

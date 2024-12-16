@@ -1,0 +1,196 @@
+body {
+  font-family: 'Noto Sans', sans-serif;
+}
+
+    /* Container for the vertical caption, positioned on the left */
+    .left-caption {
+  font-family: 'Google Sans', sans-serif;
+  text-align: center; /* Centers the caption */
+  font-size: 16px; /* Sets the font size */
+      position: absolute;
+      left: -30px; /* Adjust this based on how far left you want the caption */
+      top: 63%;
+      transform: translateY(-50%); /* Centers the caption vertically */
+      writing-mode: vertical-rl;
+      transform: rotate(180deg);
+      text-align: center;
+    }
+
+    .left-caption2 {
+  font-family: 'Google Sans', sans-serif;
+  text-align: center; /* Centers the caption */
+  font-size: 16px; /* Sets the font size */
+      position: absolute;
+      left: -30px; /* Adjust this based on how far left you want the caption */
+      top: 37%;
+      transform: translateY(-50%); /* Centers the caption vertically */
+      writing-mode: vertical-rl;
+      transform: rotate(180deg);
+      text-align: center;
+    }
+.video-container {
+    display: flex; /* Makes the videos align side by side */
+    gap: 10px; /* Optional: space between the videos */
+}
+
+.footer .icon-link {
+    font-size: 25px;
+    color: #000;
+}
+
+.link-block a {
+    margin-top: 5px;
+    margin-bottom: 5px;
+}
+
+.dnerf {
+  font-variant: small-caps;
+}
+
+
+.teaser .hero-body {
+  padding-top: 0;
+  padding-bottom: 3rem;
+}
+
+.teaser {
+  font-family: 'Google Sans', sans-serif;
+}
+
+
+.publication-title {
+}
+
+.publication-banner {
+  max-height: parent;
+
+}
+
+.publication-banner video {
+  position: relative;
+  left: auto;
+  top: auto;
+  transform: none;
+  object-fit: fit;
+}
+
+.publication-header .hero-body {
+}
+
+.publication-title {
+    font-family: 'Google Sans', sans-serif;
+}
+
+
+
+.publication-authors {
+    font-family: 'Google Sans', sans-serif;
+}
+
+.publication-venue {
+    color: #555;
+    width: fit-content;
+    font-weight: bold;
+}
+
+.publication-awards {
+    color: #ff3860;
+    width: fit-content;
+    font-weight: bolder;
+}
+
+.publication-authors {
+}
+
+.publication-authors a {
+   color: hsl(204, 86%, 53%) !important;
+}
+
+.publication-authors a:hover {
+    text-decoration: underline;
+}
+
+.author-block {
+  display: inline-block;
+}
+
+.publication-banner img {
+}
+
+.publication-authors {
+  /*color: #4286f4;*/
+}
+
+.publication-video {
+    position: relative;
+    width: 100%;
+    height: 0;
+    padding-bottom: 56.25%;
+
+    overflow: hidden;
+    border-radius: 10px !important;
+}
+
+.publication-video iframe {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+
+.publication-body img {
+}
+
+.results-carousel {
+  overflow: hidden;
+}
+
+.results-carousel .item {
+  margin: 5px;  /* Increased margin for space around the box */
+  overflow: hidden;
+  border: 0px solid #bbb;
+  border-radius: 20x;
+  padding: 0px;  /* Added padding to make the box larger on the inside */
+  font-size: 0;
+}
+.results-carousel video {
+  margin: 0;
+}
+
+
+.interpolation-panel {
+  background: #f5f5f5;
+  border-radius: 10px;
+}
+
+.interpolation-panel .interpolation-image {
+  width: 100%;
+  border-radius: 5px;
+}
+
+.interpolation-video-column {
+}
+
+.interpolation-panel .slider {
+  margin: 0 !important;
+}
+
+.interpolation-panel .slider {
+  margin: 0 !important;
+}
+
+#interpolation-image-wrapper {
+  width: 100%;
+}
+#interpolation-image-wrapper img {
+  border-radius: 5px;
+}
+
+.video-caption {
+  font-family: 'Google Sans', sans-serif;
+  text-align: center; /* Centers the caption */
+  font-size: 16px; /* Sets the font size */
+  margin-top: 5px; /* Adds some space above the caption */
+  margin-bottom: 15px; /* Adds some space above the caption */
+}
